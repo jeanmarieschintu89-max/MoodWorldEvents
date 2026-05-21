@@ -3,13 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>fr.moodcraft</groupId>
-    <artifactId>MoodEvent</artifactId>
+    <artifactId>MoodWorldEvents</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
-
-    <name>MoodEvent</name>
+    <name>MoodWorldEvents</name>
 
     <properties>
         <maven.compiler.release>21</maven.compiler.release>
@@ -37,22 +35,19 @@
         <dependency>
             <groupId>com.github.MilkBowl</groupId>
             <artifactId>VaultAPI</artifactId>
-            <version>1.7</version>
+            <version>1.7.1</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
 
     <build>
-        <finalName>MoodEvent</finalName>
-
+        <finalName>MoodWorldEvents</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
-                <configuration>
-                    <release>21</release>
-                </configuration>
+                <configuration><release>21</release></configuration>
             </plugin>
         </plugins>
     </build>

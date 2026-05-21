@@ -1,0 +1,23 @@
+# MoodWorldEvents Config
+# Fusion de MoodCraftMeteo et MoodEvent.
+
+prefix: "§6[§aMood§6Craft§6] §f"
+
+temperature:
+  enabled: true
+
+weather:
+  enabled: true
+
+event:
+  name: ""
+  description: ""
+  type: "AUTRE"
+  queue-open: false
+  location:
+    world: ""
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    yaw: 0.0
+    pitch: 0.0

@@ -30,20 +30,16 @@ import fr.moodcraft.event.manager.RewardManager;
 import fr.moodcraft.event.manager.SurvivalFloorLagGuard;
 import fr.moodcraft.event.manager.WaitingRoomManager;
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class Main extends JavaPlugin {
+public final class Main {
+    private static JavaPlugin instance;
+    private Main() {}
+    public static JavaPlugin getInstance() { return instance; }
 
-    private static Main instance;
-
-    public static Main getInstance() {
-        return instance;
-    }
-
-    @Override
-    public void onEnable() {
-        instance = this;
-        saveDefaultConfig();
+    public static void enable(JavaPlugin plugin) {
+        instance = plugin;
         VaultHook.setup();
         EventManager.load();
         WaitingRoomManager.load();
@@ -78,26 +74,24 @@ public class Main extends JavaPlugin {
         registerCommand("eventstop", adminCommand);
         registerCommand("eventannuler", adminCommand);
 
-        Bukkit.getPluginManager().registerEvents(new EventAdminGUIListener(), this);
-        Bukkit.getPluginManager().registerEvents(new EventChatListener(), this);
-        Bukkit.getPluginManager().registerEvents(new GeneratorInputManager(), this);
-        Bukkit.getPluginManager().registerEvents(new EventLootListener(), this);
-        Bukkit.getPluginManager().registerEvents(new EventMobGuard(), this);
-        Bukkit.getPluginManager().registerEvents(new EventProtectionListener(), this);
-        Bukkit.getPluginManager().registerEvents(new EventProgressListener(), this);
-        Bukkit.getPluginManager().registerEvents(new PrisonEscapeListener(), this);
-        Bukkit.getPluginManager().registerEvents(new EventDeathGuard(), this);
-        Bukkit.getPluginManager().registerEvents(new SurvivalFloorTask(), this);
-        Bukkit.getPluginManager().registerEvents(new GoldRushTask(), this);
-        Bukkit.getPluginManager().registerEvents(new GoldRushPressureReminder(), this);
-        Bukkit.getPluginManager().registerEvents(new GoldRushStopGuard(), this);
-        Bukkit.getPluginManager().registerEvents(new GoldRushInventoryGuard(), this);
-
-        getLogger().info("MoodEvent active : Mine en folie, Tour Infernale, Water Jump et Prison Escape.");
+        Bukkit.getPluginManager().registerEvents(new EventAdminGUIListener(), plugin);
+        Bukkit.getPluginManager().registerEvents(new EventChatListener(), plugin);
+        Bukkit.getPluginManager().registerEvents(new GeneratorInputManager(), plugin);
+        Bukkit.getPluginManager().registerEvents(new EventLootListener(), plugin);
+        Bukkit.getPluginManager().registerEvents(new EventMobGuard(), plugin);
+        Bukkit.getPluginManager().registerEvents(new EventProtectionListener(), plugin);
+        Bukkit.getPluginManager().registerEvents(new EventProgressListener(), plugin);
+        Bukkit.getPluginManager().registerEvents(new PrisonEscapeListener(), plugin);
+        Bukkit.getPluginManager().registerEvents(new EventDeathGuard(), plugin);
+        Bukkit.getPluginManager().registerEvents(new SurvivalFloorTask(), plugin);
+        Bukkit.getPluginManager().registerEvents(new GoldRushTask(), plugin);
+        Bukkit.getPluginManager().registerEvents(new GoldRushPressureReminder(), plugin);
+        Bukkit.getPluginManager().registerEvents(new GoldRushStopGuard(), plugin);
+        Bukkit.getPluginManager().registerEvents(new GoldRushInventoryGuard(), plugin);
+        plugin.getLogger().info("MoodEvent intégré à MoodWorldEvents.");
     }
 
-    @Override
-    public void onDisable() {
+    public static void disable() {
         EventHypeAnnouncer.stop();
         EventManager.save();
         WaitingRoomManager.save();
@@ -106,12 +100,9 @@ public class Main extends JavaPlugin {
         EventLootManager.save();
         EventLogManager.save();
         EventSecurityManager.save();
-        getLogger().info("MoodEvent desactive.");
     }
 
-    private void registerCommand(String name, org.bukkit.command.CommandExecutor executor) {
-        if (getCommand(name) != null) {
-            getCommand(name).setExecutor(executor);
-        }
+    private static void registerCommand(String name, CommandExecutor executor) {
+        if (instance.getCommand(name) != null) instance.getCommand(name).setExecutor(executor);
     }
 }

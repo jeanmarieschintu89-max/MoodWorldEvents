@@ -48,6 +48,8 @@ public class Main extends JavaPlugin {
 
         saveDefaultConfig();
 
+        fr.moodcraft.event.Main.enable(this);
+
         MeteoCommand meteoCommand = new MeteoCommand();
 
         registerCommand("meteo", meteoCommand);
@@ -169,7 +171,7 @@ public class Main extends JavaPlugin {
         );
 
         getLogger().info("=================================");
-        getLogger().info("☁ MoodCraftMeteo activé");
+        getLogger().info("☁ MoodWorldEvents activé");
         getLogger().info("Monde météo : world uniquement");
         getLogger().info("Nether et End ignorés");
         getLogger().info("Climat dynamique chargé");
@@ -183,7 +185,8 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        getLogger().info("☁ MoodCraftMeteo désactivé");
+        fr.moodcraft.event.Main.disable();
+        getLogger().info("☁ MoodWorldEvents désactivé");
     }
 
     private void registerCommand(
