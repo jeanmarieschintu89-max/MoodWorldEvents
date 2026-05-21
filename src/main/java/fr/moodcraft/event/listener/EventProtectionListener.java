@@ -159,7 +159,8 @@ public class EventProtectionListener implements Listener {
     @EventHandler
     public void onCommand(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
-        if (!EventManager.isEventPlayer(player)) return;
+        if (!shouldBlockCommands(player)) return;
+
         String message = event.getMessage().toLowerCase(Locale.ROOT).trim();
         for (String blocked : BLOCKED_COMMANDS) {
             if (message.equals(blocked) || message.startsWith(blocked + " ")) {
@@ -168,6 +169,12 @@ public class EventProtectionListener implements Listener {
                 return;
             }
         }
+    }
+
+    private boolean shouldBlockCommands(Player player) {
+        if (player == null) return false;
+        if (isInsideWaitingRoom(player.getLocation())) return true;
+        return EventManager.isRunning() && EventManager.isParticipant(player);
     }
 
     private boolean isInsideProtectedEventZone(Location location) {
