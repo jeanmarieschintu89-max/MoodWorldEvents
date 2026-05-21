@@ -1,0 +1,7 @@
+prefix: "§b[Meteo] §f"
+
+temperature:
+  enabled: true
+
+weather:
+  enabled: true
