@@ -4,10 +4,10 @@ import org.bukkit.Material;
 
 public enum GeneratedGameSize {
 
-    PETIT("Petit", Material.LIME_CONCRETE, 13, 10, 60, 21),
-    MOYEN("Moyen", Material.GOLD_BLOCK, 15, 11, 90, 31),
-    GRAND("Grand", Material.ORANGE_CONCRETE, 17, 12, 125, 43),
-    GEANT("Géant", Material.REDSTONE_BLOCK, 19, 13, 160, 55);
+    PETIT("Petit", Material.LIME_CONCRETE, 13, 15, 60, 21),
+    MOYEN("Moyen", Material.GOLD_BLOCK, 15, 16, 90, 31),
+    GRAND("Grand", Material.ORANGE_CONCRETE, 17, 17, 125, 43),
+    GEANT("Geant", Material.REDSTONE_BLOCK, 19, 18, 160, 55);
 
     private final String displayName;
     private final Material icon;
@@ -75,13 +75,13 @@ public enum GeneratedGameSize {
     public String describeFor(GeneratedGameType type) {
         if (type == null) return displayName;
         return switch (type) {
-            case SURVIE_ETAGES -> survivalWidth + "x" + survivalWidth + " §8• §7" + survivalFloors + " étages";
-            case RUEE_OR -> getGoldRushWidth() + "x" + getGoldRushHeight() + " §8• §7durée au choix";
+            case SURVIE_ETAGES -> survivalWidth + "x" + survivalWidth + " §8• §7" + survivalFloors + " etages";
+            case RUEE_OR -> getGoldRushWidth() + "x" + getGoldRushHeight() + " §8• §7duree au choix";
             case WATER_JUMP -> waterLength + " blocs §8• §7hauteur progressive";
             case MUR_ESCALADE -> getClimbPlatforms() + " plateformes §8• §7jump vertical";
-            case LABYRINTHE -> mazeWidth + "x" + mazeWidth + " §8• §7carré avec sas";
-            case LABYRINTHE_ROND -> mazeWidth + " blocs §8• §7rond, départ au centre";
-            case PRISON_BREAK -> getPrisonCells() + "x" + getPrisonCells() + " cellules §8• §7plan aléatoire";
+            case LABYRINTHE -> mazeWidth + "x" + mazeWidth + " §8• §7carre avec sas";
+            case LABYRINTHE_ROND -> mazeWidth + " blocs §8• §7rond, depart au centre";
+            case PRISON_BREAK -> getPrisonCells() + "x" + getPrisonCells() + " cellules §8• §7plan aleatoire";
         };
     }
 }
