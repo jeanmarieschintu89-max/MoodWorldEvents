@@ -1,6 +1,7 @@
 package fr.moodcraft.event;
 
 import fr.moodcraft.event.command.EventAdminCommand;
+import fr.moodcraft.event.command.EventAutoCommand;
 import fr.moodcraft.event.command.EventCommand;
 import fr.moodcraft.event.generator.GeneratedGameManager;
 import fr.moodcraft.event.hook.VaultHook;
@@ -19,6 +20,7 @@ import fr.moodcraft.event.listener.GoldRushTask;
 import fr.moodcraft.event.listener.PrisonEscapeListener;
 import fr.moodcraft.event.listener.SurvivalFloorTask;
 import fr.moodcraft.event.loot.EventLootManager;
+import fr.moodcraft.event.manager.EventAutoManager;
 import fr.moodcraft.event.manager.EventAutoStartTask;
 import fr.moodcraft.event.manager.EventHypeAnnouncer;
 import fr.moodcraft.event.manager.EventLaunchBufferManager;
@@ -50,12 +52,14 @@ public final class Main {
         EventSecurityManager.load();
         EventReturnSafety.start();
         EventAutoStartTask.start();
+        EventAutoManager.start();
         EventHypeAnnouncer.start();
         EventLaunchBufferManager.start();
         SurvivalFloorLagGuard.start();
 
         EventCommand eventCommand = new EventCommand();
         EventAdminCommand adminCommand = new EventAdminCommand();
+        EventAutoCommand autoCommand = new EventAutoCommand();
         registerCommand("event", eventCommand);
         registerCommand("eventadmin", adminCommand);
         registerCommand("eventmenu", adminCommand);
@@ -73,6 +77,7 @@ public final class Main {
         registerCommand("eventlancer", adminCommand);
         registerCommand("eventstop", adminCommand);
         registerCommand("eventannuler", adminCommand);
+        registerCommand("eventauto", autoCommand);
 
         Bukkit.getPluginManager().registerEvents(new EventAdminGUIListener(), plugin);
         Bukkit.getPluginManager().registerEvents(new EventChatListener(), plugin);
@@ -92,6 +97,7 @@ public final class Main {
     }
 
     public static void disable() {
+        EventAutoManager.stop();
         EventHypeAnnouncer.stop();
         EventManager.save();
         WaitingRoomManager.save();
