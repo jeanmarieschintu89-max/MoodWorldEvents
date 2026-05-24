@@ -117,6 +117,12 @@ commands:
     permission: moodevent.admin
     permission-message: "§c✖ §fAccès réservé à l'administration événementielle."
     aliases: [eventgui, éventgui, eventpanel]
+  eventauto:
+    description: Gère les événements automatiques aléatoires.
+    usage: /eventauto
+    permission: moodevent.admin
+    permission-message: "§c✖ §fAccès réservé à l'administration événementielle."
+    aliases: [eventautomatique, autoevent, eventrandom]
   eventcreer:
     description: Créer un événement.
     usage: /eventcreer <nom>
